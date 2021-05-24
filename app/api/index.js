@@ -1,14 +1,14 @@
 
 const Games = [
   {
-    Platforms: "https://api.rawg.io/api/platforms",
+    Platforms: "https://api.rawg.io/api/platforms?key=539bca224e7e4cffbe3233e4a46e4d6b",
     Games:
       "https://api.rawg.io/api/games?dates=2020-08-20%2C2020-08-20&ordering=-added&page=1&page_size=50",
     PlatformGames:
-      "https://api.rawg.io/api/games?platforms=4&dates=2020-11-20%2C2020-11-20&ordering=-added&page=1&page_size=50",
+      "https://api.rawg.io/api/games?key=539bca224e7e4cffbe3233e4a46e4d6b&platforms=4&dates=2020-11-20%2C2020-11-20&ordering=-added&page=1&page_size=50",
     FilterGame:
-      "https://api.rawg.io/api/games?key=6b83d0d04c194744b2865843be48d3e8search=",
-    PlatformGamesDates: "https://api.rawg.io/api/games?dates=",
+      "https://api.rawg.io/api/games?key=539bca224e7e4cffbe3233e4a46e4d6b&search=",
+    PlatformGamesDates: "https://api.rawg.io/api/games?key=539bca224e7e4cffbe3233e4a46e4d6b&dates=",
     //&ordering=-rating&page=1&page_size=10
   },
 ];
@@ -142,8 +142,6 @@ const gameToday = async () => {
 };
 
 export default {
-  login,
-  svc,
   platforms,
   games,
   gameSearch,

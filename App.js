@@ -6,8 +6,6 @@ import { StatusBar } from "expo-status-bar";
 // Auth.
 import AuthContext from "./app/auth/authContext";
 import authStorage from "./app/auth/authStorage";
-import Login from "./app/auth/screens/Login";
-import AuthNavigator from "./app/auth/AuthNavigator";
 
 // Navigation.
 import AppNavigator from "./app/routes/AppNavigator";
@@ -20,8 +18,6 @@ export default function App() {
     const user = await authStorage.getUser();
     if (user) setUser(user);
   };
-
-  //    {user ? <AppNavigator /> : <AuthNavigator />}
 
   if (!isReady)
     return (
