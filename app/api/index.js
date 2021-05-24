@@ -1,7 +1,3 @@
-// Auth.
-import authStorage from "../auth/authStorage";
-
-const serverUrl = "https://dev.tontrac.co.za:3443/mobile/fst_v1";
 
 const Games = [
   {
@@ -16,92 +12,6 @@ const Games = [
     //&ordering=-rating&page=1&page_size=10
   },
 ];
-
-const token = authStorage.getToken();
-
-async function svc(serviceKey, params, token) {
-  try {
-    // Set server url and append endpoint.
-    const url = serverUrl + "/fst_svc";
-
-    // Setup configuration setting for post request.
-    const config = {
-      method: "POST",
-      credentials: "include",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json;charset=utf-8",
-        Authorization: "bearer " + token,
-      },
-    };
-
-    // Append the serviceKey to the existing params object (ES6).
-    params = {
-      ...params,
-      serviceKey,
-    };
-
-    // Attempt to execute the endpoint.
-    const json = await serverAjax(url, JSON.stringify(params), config);
-
-    return json;
-  } catch (err) {
-    // Return the error message reponse.
-    throw new Error(err.message);
-  }
-}
-
-async function login(params) {
-  try {
-    // Concatenate url and add login endpoint.
-    const url = serverUrl + "/fst_login";
-
-    // Setup configuration setting for post request.
-    const config = {
-      method: "POST",
-      credentials: "include",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json;charset=utf-8",
-      },
-    };
-
-    // Add params that can be passed to request.
-    const Params = {
-      ...params,
-      servicekey: "api_mobile_v1_fst_Login",
-    };
-
-    // Attempt to execute the endpoint.
-    const json = await serverAjax(url, JSON.stringify(Params), config);
-
-    return json;
-  } catch (err) {
-    throw new Error(err.message);
-  }
-}
-
-async function serverAjax(url, params, config) {
-  try {
-    // Attempt to execute the endpoint.
-    const response = await fetch(url, { ...config, body: params });
-    const json = await response;
-
-    if (response.status === 200) {
-      return json.json();
-    } else if (response.status === 401) {
-      let res = await json.json();
-      throw Error(res.message);
-    } else {
-      let res = await json.json();
-
-      // another status code
-      throw Error(res.message);
-    }
-  } catch (err) {
-    throw Error(err.message);
-  }
-}
 
 const platforms = async () => {
   try {
@@ -205,10 +115,10 @@ const gameToday = async () => {
       // Attempt to execute the endpoint.
       const response = await fetch(
         Games[0].PlatformGamesDates +
-          previousdate +
-          "%" +
-          CurrentDate +
-          "&ordering=-relevance&page_size=50"
+        previousdate +
+        "%" +
+        CurrentDate +
+        "&ordering=-relevance&page_size=50"
       );
       const json = await response;
       if (response.status === 200) {
